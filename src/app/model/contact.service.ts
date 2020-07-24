@@ -28,6 +28,28 @@ export class ContactService {
       else if (b.firstName == null) return 1;
       else return a.firstName.localeCompare(b.firstName);
     });
+
+    for (let i = 0; i < this.contacts.length; i++) {
+      if (
+        this.contacts[i].firstName == null &&
+        this.contacts[i].lastName == null &&
+        this.contacts[i].email == null
+      ) {
+        this.contacts.splice(i, 1);
+        break;
+      }
+    }
+
+    for (let i = 0; i < this.recentContact.length; i++) {
+      if (
+        this.recentContact[i].firstName == null &&
+        this.recentContact[i].lastName == null &&
+        this.recentContact[i].email == null
+      ) {
+        this.recentContact.splice(i, 1);
+        break;
+      }
+    }
   }
 
   public getContacts(): Contact[] {
