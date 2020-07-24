@@ -25,4 +25,7 @@ export class AddContactComponent implements OnInit {
     this.contactSvc.addEntry(this.model);
     this.router.navigateByUrl('/home');
   }
+  cancel() {
+    this.router.navigateByUrl('/home');
+  }
 }
