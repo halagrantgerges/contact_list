@@ -14,6 +14,35 @@ export class ContactsComponent implements OnInit {
   filteredRecentContacts: Contact[] = this.contactSvc.getRecentContacts();
   searchTerm;
   query: any;
+  alpha: string[] = [
+    'a',
+    'b',
+    'c',
+    'd',
+    'e',
+    'f',
+    'g',
+    'h',
+    'i',
+    'j',
+    'k',
+    'l',
+    'm',
+    'n',
+    'o',
+    'p',
+    'q',
+    'r',
+    's',
+    't',
+    'u',
+    'v',
+    'w',
+    'x',
+    'y',
+    'z',
+  ];
+
   ngOnInit(): void {
     this.contactSvc.sort();
     this.filteredContacts = this.contactSvc.getContacts();
@@ -47,13 +76,16 @@ export class ContactsComponent implements OnInit {
     });
   }
 
-  scrollToElement($element): void {
-    console.log($element);
-    $element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-      inline: 'nearest',
-    });
+  scrollToElement(element): void {
+    console.log(element);
+
+    element
+      ? element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+          inline: 'nearest',
+        })
+      : null;
   }
 
   btnClick = function () {
