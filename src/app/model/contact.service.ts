@@ -17,10 +17,10 @@ export class ContactService {
 
   public sort() {
     this.contacts.sort(function (a, b) {
-      return a.firstName - b.firstName;
+      return a.firstName.localeCompare(b.firstName);
     });
     this.recentContact.sort(function (a, b) {
-      return a.firstName - b.firstName;
+      return a.firstName.localeCompare(b.firstName);
     });
   }
 
