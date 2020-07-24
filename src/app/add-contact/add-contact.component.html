@@ -1,0 +1,59 @@
+<div class="card">
+  <div class="card-header text-left"><h2>Add New Contact</h2></div>
+  <div class="card-body">
+    <form class="form" #entryForm="ngForm">
+      <div class="row">
+        <mat-form-field class="example-full-width">
+          <mat-label>First Name</mat-label>
+          <input
+            matInput
+            placeholder="First Name"
+            value=""
+            [(ngModel)]="model.firstName"
+            name="firstName"
+          />
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field class="example-full-width">
+          <mat-label>Last Name</mat-label>
+          <input
+            matInput
+            placeholder="Last Name"
+            value=""
+            [(ngModel)]="model.lastName"
+            name="lastName"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field class="example-full-width">
+          <mat-label>Number</mat-label>
+          <input
+            type="number"
+            matInput
+            placeholder="Number"
+            value=""
+            [(ngModel)]="model.mobileNumber"
+            name="mobileNumber"
+          />
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            [(ngModel)]="model.email"
+            placeholder="Ex. pat@example.com"
+            name="email"
+          />
+        </mat-form-field>
+      </div>
+      <button class="btn btn-primary" (click)="save()">
+        Save
+      </button>
+    </form>
+  </div>
+</div>
