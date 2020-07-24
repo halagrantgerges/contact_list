@@ -2,9 +2,6 @@
   <a (click)="scrollToElement(target)">A</a>
 
   <div class="row">
-    <button class="btn btn-success pull-right" (click)="btnClick()">Add</button>
-  </div>
-  <div class="row">
     <input
       type="text"
       placeholder=" search..."
@@ -12,6 +9,11 @@
       [(ngModel)]="query"
       class="input"
     />
+  </div>
+  <div class="row">
+    <button class="btn btn-light btn-block" (click)="btnClick()">
+      <span>Add <mat-icon>add_circle_outline</mat-icon></span>
+    </button>
   </div>
   <mat-selection-list>
     <h3>Latest Contacts</h3>
