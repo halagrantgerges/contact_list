@@ -1,63 +1,65 @@
-<a (click)="scrollToElement(target)">A</a>
+<div class="container">
+  <a (click)="scrollToElement(target)">A</a>
 
-<div class="row">
-  <button class="btn btn-success pull-right" (click)="btnClick()">Add</button>
-</div>
-<div class="row">
-  <input
-    type="text"
-    placeholder=" search..."
-    (keyup)="search()"
-    [(ngModel)]="query"
-    class="input"
-  />
-</div>
-<mat-selection-list>
-  <h3>Latest Contacts</h3>
-  <mat-list-option *ngFor="let contact of filteredRecentContacts">
-    <div class="row">
-      <div class="column" style="width: 12%; float: left;">
-        <span
-          matBadge="{{ contact.firstName | slice: 0:1 | uppercase }}{{
-            contact.lastName | slice: 0:1 | uppercase
-          }}"
-          matBadgeSize="miduam"
-          matBadgeOverlap="false"
-          >&nbsp;</span
-        >
-      </div>
-      <div class="column" style="width: 80%; float: left;">
-        <div class="row">
-          <span>{{ contact.firstName }} {{ contact.lastName }}</span>
+  <div class="row">
+    <button class="btn btn-success pull-right" (click)="btnClick()">Add</button>
+  </div>
+  <div class="row">
+    <input
+      type="text"
+      placeholder=" search..."
+      (keyup)="search()"
+      [(ngModel)]="query"
+      class="input"
+    />
+  </div>
+  <mat-selection-list>
+    <h3>Latest Contacts</h3>
+    <mat-list-option *ngFor="let contact of filteredRecentContacts">
+      <div class="row">
+        <div class="column" style="width: 12%; float: left;">
+          <span
+            matBadge="{{ contact.firstName | slice: 0:1 | uppercase }}{{
+              contact.lastName | slice: 0:1 | uppercase
+            }}"
+            matBadgeSize="miduam"
+            matBadgeOverlap="false"
+            >&nbsp;</span
+          >
         </div>
-        <div class="row email">{{ contact.email }}</div>
+        <div class="column" style="width: 80%; float: left;">
+          <div class="row">
+            <span>{{ contact.firstName }} {{ contact.lastName }}</span>
+          </div>
+          <div class="row email">{{ contact.email }}</div>
+        </div>
       </div>
-    </div>
-    <hr />
-  </mat-list-option>
-</mat-selection-list>
+      <hr />
+    </mat-list-option>
+  </mat-selection-list>
 
-<mat-selection-list>
-  <mat-list-option *ngFor="let contact of filteredContacts">
-    <div class="row">
-      <div class="column" style="width: 12%; float: left;">
-        <span
-          matBadge="{{ contact.firstName | slice: 0:1 | uppercase }}{{
-            contact.lastName | slice: 0:1 | uppercase
-          }}"
-          matBadgeSize="miduam"
-          matBadgeOverlap="false"
-          >&nbsp;</span
-        >
-      </div>
-      <div class="column" style="width: 80%; float: left;">
-        <div class="row">
-          <span>{{ contact.firstName }} {{ contact.lastName }}</span>
+  <mat-selection-list>
+    <mat-list-option *ngFor="let contact of filteredContacts">
+      <div class="row">
+        <div class="column" style="width: 12%; float: left;">
+          <span
+            matBadge="{{ contact.firstName | slice: 0:1 | uppercase }}{{
+              contact.lastName | slice: 0:1 | uppercase
+            }}"
+            matBadgeSize="miduam"
+            matBadgeOverlap="false"
+            >&nbsp;</span
+          >
         </div>
-        <div class="row email">{{ contact.email }}</div>
+        <div class="column" style="width: 80%; float: left;">
+          <div class="row">
+            <span>{{ contact.firstName }} {{ contact.lastName }}</span>
+          </div>
+          <div class="row email">{{ contact.email }}</div>
+        </div>
       </div>
-    </div>
-    <hr />
-  </mat-list-option>
-</mat-selection-list>
-<div #target>Your target</div>
+      <hr />
+    </mat-list-option>
+  </mat-selection-list>
+  <div #target>Your target</div>
+</div>
