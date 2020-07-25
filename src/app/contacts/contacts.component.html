@@ -21,6 +21,9 @@
           *ngFor="let contact of filteredRecentContacts; let x = index"
         >
           <div class="row">
+            <div style="width: 10%; float: left;" class="column">
+              &nbsp;
+            </div>
             <div class="column" style="width: 20%; float: left;">
               <span
                 matBadge="&nbsp;{{
@@ -31,7 +34,7 @@
                 >&nbsp;</span
               >
             </div>
-            <div class="column" style="width: 80%; float: left;">
+            <div class="column" style="width: 70%; float: left;">
               <div class="row">
                 <span>{{ contact.firstName }} {{ contact.lastName }}</span>
               </div>
@@ -47,6 +50,25 @@
           *ngFor="let contact of filteredContacts; let i = index"
         >
           <div class="row" id="{{ i }}">
+            <div
+              style="width: 10%; float: left; font-weight: bold;"
+              class="column"
+              *ngIf="
+                i == 0 ||
+                  filteredContacts[i - 1].firstName
+                    .substr(0, 1)
+                    .toLowerCase() !=
+                    contact.firstName.substr(0, 1).toLowerCase();
+                else elseBlock
+              "
+            >
+              {{ contact.firstName | slice: 0:1 | uppercase }}
+            </div>
+            <ng-template #elseBlock>
+              <div style="width: 10%; float: left;" class="column">
+                &nbsp;
+              </div></ng-template
+            >
             <div class="column" style="width: 20%; float: left;">
               <span
                 #i
@@ -58,7 +80,7 @@
                 >&nbsp;</span
               >
             </div>
-            <div class="column" style="width: 80%; float: left;">
+            <div class="column" style="width: 70%; float: left;">
               <div class="row">
                 <span>{{ contact.firstName }} {{ contact.lastName }}</span>
               </div>
@@ -82,9 +104,4 @@
       </mat-list>
     </div>
   </div>
-  <div #target>Your target</div>
-
-  <div #a>Your target</div>
 </div>
-
-<div #2>Your target</div>
