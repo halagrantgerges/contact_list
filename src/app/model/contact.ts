@@ -6,3 +6,8 @@ export class Contact {
   firstName: string;
   lastName: string;
 }
+
+export class AlphaMap {
+  alpha: string;
+  alphaIndex: number;
+}

@@ -1,6 +1,4 @@
 <div class="container">
-  <a (click)="scrollToElement(target)">A</a>
-
   <div class="row">
     <input
       type="text"
@@ -19,7 +17,9 @@
     <div class="column">
       <mat-selection-list>
         <h3>Latest Contacts</h3>
-        <mat-list-option *ngFor="let contact of filteredRecentContacts">
+        <mat-list-option
+          *ngFor="let contact of filteredRecentContacts; let x = index"
+        >
           <div class="row">
             <div class="column" style="width: 20%; float: left;">
               <span
@@ -43,10 +43,13 @@
       </mat-selection-list>
       <div class="divider">&nbsp;</div>
       <mat-selection-list>
-        <mat-list-option *ngFor="let contact of filteredContacts">
-          <div class="row">
+        <mat-list-option
+          *ngFor="let contact of filteredContacts; let i = index"
+        >
+          <div class="row" id="{{ i }}">
             <div class="column" style="width: 20%; float: left;">
               <span
+                #i
                 matBadge="&nbsp;{{
                   contact.firstName | slice: 0:1 | uppercase
                 }}{{ contact.lastName | slice: 0:1 | uppercase }}&nbsp;"
@@ -69,10 +72,12 @@
     <div class="column">
       <mat-list dense>
         <mat-list-item
-          *ngFor="let letter of alpha"
-          (click)="scrollToElement(letter)"
+          *ngFor="let letter of alphaMap"
+          (click)="scrollToElement(letter.alphaIndex)"
         >
-          {{ letter }}
+          <span #letter.alphaIndex style="cursor: pointer;">
+            {{ letter.alpha }}
+          </span>
         </mat-list-item>
       </mat-list>
     </div>
@@ -81,3 +86,5 @@
 
   <div #a>Your target</div>
 </div>
+
+<div #2>Your target</div>

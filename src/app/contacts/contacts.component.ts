@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Contact } from '../model/contact';
+import { Component, OnInit, ViewChild, Input, ElementRef } from '@angular/core';
+import { Contact, AlphaMap } from '../model/contact';
 import { Router } from '@angular/router';
 import { ContactService } from '../model/contact.service';
+import { MatDivider } from '@angular/material/divider';
 
 @Component({
   selector: 'app-contacts',
@@ -9,11 +10,14 @@ import { ContactService } from '../model/contact.service';
   styleUrls: ['./contacts.component.css'],
 })
 export class ContactsComponent implements OnInit {
-  constructor(private router: Router, public contactSvc: ContactService) {}
+  constructor(private router: Router, public contactSvc: ContactService) {
+    this.mapMyAlpha();
+  }
   filteredContacts: Contact[] = this.contactSvc.getContacts();
   filteredRecentContacts: Contact[] = this.contactSvc.getRecentContacts();
   searchTerm;
   query: any;
+  @ViewChild('target') nameElementRef: ElementRef;
   alpha: string[] = [
     'a',
     'b',
@@ -42,11 +46,23 @@ export class ContactsComponent implements OnInit {
     'y',
     'z',
   ];
+  alphaMap: AlphaMap[] = [];
+  target: string = 'target';
 
   ngOnInit(): void {
     this.contactSvc.sort();
     this.filteredContacts = this.contactSvc.getContacts();
     this.filteredRecentContacts = this.contactSvc.getRecentContacts();
+    this.mapMyAlpha();
+  }
+  mapMyAlpha(): void {
+    for (let i = 0; i < this.alpha.length; i++) {
+      let index = this.filteredContacts.findIndex(
+        (x) => x.firstName.substr(0, 1).toLowerCase() === this.alpha[i]
+      );
+      this.alphaMap.push({ alpha: this.alpha[i], alphaIndex: index });
+    }
+    console.log(this.alphaMap);
   }
 
   search(): void {
@@ -74,13 +90,17 @@ export class ContactsComponent implements OnInit {
           (tag.firstName + ' ' + tag.lastName).toLowerCase().indexOf(term) >= 0)
       );
     });
+    // this.mapMyAlpha();
   }
 
   scrollToElement(element): void {
-    console.log(element);
+    //  @ViewChild('element') myelem: ElementRef ;
+    console.log('here', element);
 
-    element
-      ? element.scrollIntoView({
+    let el = document.getElementById(element);
+    // this.nameElementRef.nativeElement.focus();
+    el
+      ? el.scrollIntoView({
           behavior: 'smooth',
           block: 'start',
           inline: 'nearest',
