@@ -17,7 +17,6 @@ export class ContactsComponent implements OnInit {
   filteredRecentContacts: Contact[] = this.contactSvc.getRecentContacts();
   searchTerm;
   query: any;
-  @ViewChild('target') nameElementRef: ElementRef;
   alpha: string[] = [
     'a',
     'b',
@@ -47,7 +46,6 @@ export class ContactsComponent implements OnInit {
     'z',
   ];
   alphaMap: AlphaMap[] = [];
-  target: string = 'target';
 
   ngOnInit(): void {
     this.contactSvc.sort();
@@ -62,7 +60,6 @@ export class ContactsComponent implements OnInit {
       );
       this.alphaMap.push({ alpha: this.alpha[i], alphaIndex: index });
     }
-    console.log(this.alphaMap);
   }
 
   search(): void {
@@ -71,10 +68,10 @@ export class ContactsComponent implements OnInit {
       tag
     ) {
       return (
-        tag.firstName &&
-        (tag.firstName.toLowerCase().indexOf(term) >= 0 ||
-          tag.lastName.toLowerCase().indexOf(term) >= 0 ||
-          tag.email.toLowerCase().indexOf(term) >= 0 ||
+        (tag.firstName && tag.firstName.toLowerCase().indexOf(term) >= 0) ||
+        (tag.lastName && tag.lastName.toLowerCase().indexOf(term) >= 0) ||
+        (tag.email && tag.email.toLowerCase().indexOf(term) >= 0) ||
+        (tag.firstName + ' ' + tag.lastName != '' &&
           (tag.firstName + ' ' + tag.lastName).toLowerCase().indexOf(term) >= 0)
       );
     });
@@ -83,22 +80,18 @@ export class ContactsComponent implements OnInit {
       ...this.contactSvc.getRecentContacts(),
     ].filter(function (tag) {
       return (
-        tag.firstName &&
-        (tag.firstName.toLowerCase().indexOf(term) >= 0 ||
-          tag.lastName.toLowerCase().indexOf(term) >= 0 ||
-          tag.email.toLowerCase().indexOf(term) >= 0 ||
+        (tag.firstName && tag.firstName.toLowerCase().indexOf(term) >= 0) ||
+        (tag.lastName && tag.lastName.toLowerCase().indexOf(term) >= 0) ||
+        (tag.email && tag.email.toLowerCase().indexOf(term) >= 0) ||
+        (tag.firstName + ' ' + tag.lastName != '' &&
           (tag.firstName + ' ' + tag.lastName).toLowerCase().indexOf(term) >= 0)
       );
     });
-    // this.mapMyAlpha();
+    this.mapMyAlpha();
   }
-
+  //scroll to element in a the page
   scrollToElement(element): void {
-    //  @ViewChild('element') myelem: ElementRef ;
-    console.log('here', element);
-
     let el = document.getElementById(element);
-    // this.nameElementRef.nativeElement.focus();
     el
       ? el.scrollIntoView({
           behavior: 'smooth',
